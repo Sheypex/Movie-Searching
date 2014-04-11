@@ -2,6 +2,11 @@ String.prototype.contains = function(it) {
     return this.indexOf(it) !== -1;
 };
 
+var takeOutDebug = function() {
+	$(".removeInFinalVersion").html("");				/* .removeInFinalVersion is used to take out code-parts completely, */
+	$(".removeInFinalVersion2").css("display", "none");	/* .removeInFinalVersion2 to prevent them from being shown, preventing possible errors on sides of jQuery that would occure if the code-part were taken out completely*/
+}
+
 var search_form_submit = function() {
     /*Linked to search_div onSubmit event!!!*/
     var view = {};
@@ -24,6 +29,9 @@ var detailed_film_info_submit = function(titleToSearch) {
 /* http://www.omdbapi.com/?s= &i= &t= &y= &r= &plot= &callback= &tomatoes= */
 
 $(document).ready(function() {
+	/*#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-*/
+	/*#-#-#-#-#-*/takeOutDebug(); /*#-#-#-#-#-*/
+	/*#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-*/
     $("input[type=submit]").on("click", function(e) {
         e.preventDefault();
         var url = search_form_submit();
