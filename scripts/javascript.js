@@ -68,6 +68,9 @@ $(document).ready(function() {
         }).done(function() {
             out += "Successfully Loaded the film data.<br />";
             $("#final_film_info").html(out);
+			
+			$(".displayAfterSearch").css("display", "");
+			$("a.title_link").eq(0).click();
         }).fail(function(jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
             $("#final_film_info").html("Request Failed: " + err + ".<br />");
@@ -79,10 +82,15 @@ $(document).ready(function() {
         var url = detailed_film_info_submit($this.text());
         var out = "";
         $.getJSON(url, function(data) {
-            $("#detailed_film_info").css("display", "inline-block");
+			$("#detailed_film_info").fadeIn("slow");;
             
             /*poster-----------------*/
-            $("#detailed_film_info_poster").attr("src", data.Poster);
+			if(data.Poster !== "N/A")
+			$("#detailed_film_info_poster").attr("src", data.Poster);
+			else
+			$("#detailed_film_info_poster").disable();
+			$("#detailed_film_info_poster").attr("alt", "Movie poster not found, sorry! Original can be found here: " + data.Poster);
+			if(data.Poster != "N/A")
             $("#detailed_film_info_poster_link").attr("href", data.Poster);
             
             /*title, year, type------*/
